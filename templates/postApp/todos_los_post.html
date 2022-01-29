@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Posteos</title>
+</head>
+<body>
+    
+    <div class="container">
+        
+        {% for p in posts %}
+
+        <div class="card mb-3" style="max-width: 540px;">
+            <div class="row g-0">
+                <div class="col-md-4">
+                    <img src="{{ p.imagen.url }}" class="img-fluid rounded-start" alt="...">
+            </div>
+            <div class="col-md-8">
+                <div class="card-body">
+                    <h3 class="card-title">{{ p.titulo }}</h3>
+                    <h5 class="card-title">{{ p.subtitulo }}</h5>
+                    <p class="card-text">{{ p.contenido|truncatechars:15 }}</p>
+                    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                </div>
+            </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+
+
+</body>
+</html>
