@@ -21,9 +21,34 @@ class Post(models.Model):
 
 class Comentario(models.Model):
     #autor= models.ForeignKey()
+    post = models.ForeignKey(Post, on_delete=models.CASCADE)
     fecha_publicacion = models.DateTimeField(auto_now_add=True)
-    fecha_edicion = models.DateTimeField(auto_now=True)
     contenido = models.TextField('contenido', null=False, blank=False)
 
-    #def __str__(self):
+    # def __str__(self):
+    #    return f'{self.autor}'
+
+
+class Vistas(models.Model):
+    #autor= models.ForeignKey()
+    post = models.ForeignKey(Post, on_delete=models.CASCADE)
+    fecha_publicacion = models.DateTimeField(auto_now_add=True)
+
+    # def __str__(self):
+    #    return f'{self.autor}'
+
+
+class MeGusta(models.Model):
+    #autor= models.ForeignKey()
+    post = models.ForeignKey(Post, on_delete=models.CASCADE)
+
+    # def __str__(self):
+    #    return f'{self.autor}'
+
+
+class NoMeGusta(models.Model):
+    #autor= models.ForeignKey()
+    post = models.ForeignKey(Post, on_delete=models.CASCADE)
+
+    # def __str__(self):
     #    return f'{self.autor}'

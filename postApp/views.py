@@ -4,7 +4,7 @@ from postApp.models import Post
 
 def inicio(request):
 
-    return render(request, 'postApp/inicio.html')
+    return render(request, 'postApp/index.html')
 
 
 def todos_los_post(request):
