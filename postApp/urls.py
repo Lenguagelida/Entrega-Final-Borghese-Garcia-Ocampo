@@ -4,5 +4,5 @@ from postApp import views
 
 urlpatterns = [
     path('', views.inicio, name="inicio"),
-    path('todosLosPosteos/', views.todos_los_post, name='todosLosPosteos'),
+    path('todosLosPosts/', views.todos_los_post, name='todosLosPosts'),
 ]
