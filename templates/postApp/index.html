@@ -17,15 +17,15 @@
         <!-- Responsive navbar-->
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <div class="container">
-                <a class="navbar-brand" href="#!">Start Bootstrap</a>
+                <a class="navbar-brand" href="#!">Inicio</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                         <li class="nav-item"><a class="nav-link active" aria-current="page" href="#">Blog</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#">Iniciar seción</a></li>
                         <li class="nav-item"><a class="nav-link" href="#!">Acerca de nosotros</a></li>
                         <li class="nav-item"><a class="nav-link" href="#!">Contacto</a></li>
-                        
+                        <li class="nav-item"><a class="nav-link" href="{% url 'Login' %}">Ingresar</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'Register' %}">Registro</a></li>
                     </ul>
                 </div>
             </div>
@@ -34,11 +34,20 @@
         <header class="py-5 bg-light border-bottom mb-4">
             <div class="container">
                 <div class="text-center my-5">
-                    <h1 class="fw-bolder">Welcome to Blog Home!</h1>
-                    <p class="lead mb-0">A Bootstrap 5 starter layout for your next blog homepage</p>
+                    <h1 class="fw-bolder">Bienvenido a Tercer Tiempo!</h1>
+                    <p class="lead mb-0">Si 90 minutos no son suficientes para vos, entonces este es tu lugar para seguir debatiendo sobre fútbol argentino</p>
                 </div>
             </div>
         </header>
+        <!-- Background image -->
+        <div
+            class="bg-image"
+            style="
+                background-image: url('https://www.axis.com/sites/axis/files/styles/landscape_1920_x_768_jpg/public/2020-09/soccer_stadium_spectators_silhouette_2009_3840x1536_0.jpg?h=71e592e0&itok=LI607JsK');
+                height: 70vh;
+            "
+        ></div>
+        <!-- Background image -->
         <!-- Page content-->
         {% block blockPosts %}
 
@@ -60,31 +69,31 @@
         <div class="col-lg-4">
             <!-- Search widget-->
             <div class="card mb-4">
-                <div class="card-header">Search</div>
+                <div class="card-header">Buscar</div>
                 <div class="card-body">
                     <div class="input-group">
-                        <input class="form-control" type="text" placeholder="Enter search term..." aria-label="Enter search term..." aria-describedby="button-search" />
+                        <input class="form-control" type="text" placeholder="¿Qué buscás?..." aria-label="¿Qué buscás?..." aria-describedby="button-search" />
                         <button class="btn btn-primary" id="button-search" type="submit">Go!</button>
                     </div>
                 </div>
             </div>
             <!-- Categories widget-->
             <div class="card mb-4">
-                <div class="card-header">Categories</div>
+                <div class="card-header">Categorias</div>
                 <div class="card-body">
                     <div class="row">
                         <div class="col-sm-6">
                             <ul class="list-unstyled mb-0">
-                                <li><a href="#!">Web Design</a></li>
-                                <li><a href="#!">HTML</a></li>
-                                <li><a href="#!">Freebies</a></li>
+                                <li><a href="#!">Primera División</a></li>
+                                <li><a href="#!">Primera Nacional</a></li>
+                                <li><a href="#!">Selección Nacional</a></li>
                             </ul>
                         </div>
                         <div class="col-sm-6">
                             <ul class="list-unstyled mb-0">
-                                <li><a href="#!">JavaScript</a></li>
-                                <li><a href="#!">CSS</a></li>
-                                <li><a href="#!">Tutorials</a></li>
+                                <li><a href="#!">Fútbol Internacional</a></li>
+                                <li><a href="#!">Rumbo Qatar 2022</a></li>
+                                <li><a href="#!">La columna del Loco Gatti</a></li>
                             </ul>
                         </div>
                     </div>

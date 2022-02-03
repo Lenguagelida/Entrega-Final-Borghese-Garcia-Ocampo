@@ -1,4 +1,4 @@
 # Entrega-Final-Borghese-Garcia-Ocampo
 Blog Proyecto Final Coderhouse Python Django
 
-Prueba committ
+Funciones añadidas: Login / Logout / Register 
