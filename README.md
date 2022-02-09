@@ -3,7 +3,7 @@ Blog Proyecto Final Coderhouse Python Django
 
 
 
-Status de funcionalidades:
+Progreso de funcionalidades:
 
 
 NavBar: En progreso (Pendiente de dar toques finales) -> David
