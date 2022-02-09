@@ -6,11 +6,11 @@ Blog Proyecto Final Coderhouse Python Django
 Progreso de funcionalidades:
 
 
-NavBar: En progreso (Pendiente de dar toques finales) -> David
+NavBar: En progreso (Pendiente de dar toques finales) -> Valentin
 
 Home: Incompleto
 
-About: None
+About: None -> Valentin
 
 Pages: None
 
@@ -18,7 +18,7 @@ Login: Completado -> David
 
 Signup: Completado -> David
 
-Messages: N/A (No se va a realizar)
+Messages: N/A -> No se va a realizar
 
 Profile: None -> David
 
