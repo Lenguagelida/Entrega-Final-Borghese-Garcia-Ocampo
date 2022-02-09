@@ -27,18 +27,17 @@ def register(request):
 
             form = CreateUserForm(data=request.POST)
 
-        if form.is_valid():
+            if form.is_valid():
 
-            username = form.cleaned_data['username']
-            form.save()
-
-            return render (request, "usuariosApp/login.html", {"mensaje":"Usuario creado con Éxito"})
+                username = form.cleaned_data['username']
+                form.save()
+                return render (request, "usuariosApp/login.html", {"mensaje":"Usuario creado con Éxito"})
 
         else:
 
             form = CreateUserForm()
 
-    return render (request, "usuariosApp/registro.html" , {"form":form})
+            return render (request, "usuariosApp/registro.html" , {"form":form})
 
 
 #Login
@@ -47,7 +46,7 @@ def login_request(request):
         return redirect('inicio')
     else:
         if request.method == "POST":
-            
+                
             form = AuthenticationForm(request, data=request.POST)
 
             if form.is_valid():
@@ -60,18 +59,18 @@ def login_request(request):
 
                     login(request, user)
 
-                    #return redirect ('inicio2.html')
+                        #return redirect ('inicio2.html')
 
                     return render (request, "usuariosApp/inicio2.html", {"mensaje":f"Bienvenido {user.get_username()}"})
-                
+                    
                 else:
 
                     return render (request, "usuariosApp/login.html", {"mensaje":"Datos incorrectos"})
-            
+                
             else:
 
-                    return render (request, "usuariosApp/login.html", {"mensaje":"Error en el formulario"})
-        
+                return render (request, "usuariosApp/login.html", {"mensaje":"Error en el formulario"})
+            
         form = AuthenticationForm()
 
         return render (request,"usuariosApp/login.html", {'form':form})
