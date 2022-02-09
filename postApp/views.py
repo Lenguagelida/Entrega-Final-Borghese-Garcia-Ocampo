@@ -7,7 +7,7 @@ from django.views.generic.edit import DeleteView, CreateView, UpdateView
 
 def inicio(request):
 
-    return render(request, 'postApp/index.html')
+    return render(request, 'index.html')
 
 
 def todos_los_post(request):

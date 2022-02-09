@@ -14,7 +14,7 @@ from django.contrib.auth.decorators import login_required
 
 def inicio(request):
 
-    return render(request, "usuariosApp/inicio.html")
+    return render(request, "usuariosApp/inicio2.html")
 
 
 #Register
@@ -61,7 +61,7 @@ def login_request(request):
 
                         #return redirect ('inicio2.html')
 
-                    return render (request, "usuariosApp/inicio2.html", {"mensaje":f"Bienvenido {user.get_username()}"})
+                    return render (request, "index.html", {"mensaje":f"Bienvenido {user.get_username()}"})
                     
                 else:
 
