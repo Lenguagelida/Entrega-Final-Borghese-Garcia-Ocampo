@@ -2,6 +2,7 @@
 Blog Proyecto Final Coderhouse Python Django
 
 
+
 Status de funcionalidades:
 
 
