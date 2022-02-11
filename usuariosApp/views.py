@@ -8,36 +8,35 @@ from django.contrib.auth import login, logout, authenticate
 from .forms import CreateUserForm
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from usuariosApp.forms import UserRegisterForm,UserEditForm
 
 
 #login_required(login_url='login')
 
 def inicio(request):
 
-    return render(request, "usuariosApp/inicio2.html")
+    return render(request, "postApp/inicio.html")
 
 
 #Register
 def register(request):
-    if request.user.is_authenticated:
-        return redirect('inicio')
-    else:
+    if request.method == 'POST':
+        form = UserRegisterForm(request.POST)
 
-        if request.method == "POST":
-
-            form = CreateUserForm(data=request.POST)
-
-            if form.is_valid():
-
-                username = form.cleaned_data['username']
-                form.save()
-                return render (request, "usuariosApp/login.html", {"mensaje":"Usuario creado con Éxito"})
+        if form.is_valid():
+            username = form.cleaned_data['username']
+            form.save()
+            
+            return render(request, 'usuariosApp/bienvenido.html',{"mensaje":f"El usuario de {username} se ha creado con éxito"})
 
         else:
 
-            form = CreateUserForm()
+            return render(request, 'usuariosApp/bienvenido.html',{"mensaje":"El usuario no se ha creado"})
 
-            return render (request, "usuariosApp/registro.html" , {"form":form})
+    else:
+        
+        form = UserRegisterForm()
+        return render(request,'usuariosApp/registro.html',{"form":form})
 
 
 #Login
@@ -61,7 +60,7 @@ def login_request(request):
 
                         #return redirect ('inicio2.html')
 
-                    return render (request, "index.html", {"mensaje":f"Bienvenido {user.get_username()}"})
+                    return render (request, "usuariosApp/bienvenido.html", {"mensaje":f"Bienvenido {user.get_username()}"})
                     
                 else:
 
@@ -75,6 +74,34 @@ def login_request(request):
 
         return render (request,"usuariosApp/login.html", {'form':form})
 
+def editarPerfil(request):
+
+      #Instancia del login
+      usuario = request.user
+     
+      #Si es metodo POST hago lo mismo que el agregar
+      if request.method == 'POST':
+            miFormulario = UserEditForm(request.POST) 
+            if miFormulario.is_valid():   #Si pasó la validación de Django
+
+                  informacion = miFormulario.cleaned_data
+            
+                  #Datos que se modificarán
+                  usuario.email = informacion['email']
+                  usuario.password1 = informacion['password1']
+                  usuario.password2 = informacion['password1']
+                  usuario.first_name = informacion['first_name']
+                  usuario.last_name = informacion['last_name']
+                  usuario.save()
+
+                  return render(request, "usuariosApp/bienvenido.html",{"mensaje":"Datos de perfil modificados correctamente"}) #Vuelvo al inicio o a donde quieran
+      #En caso que no sea post
+      else: 
+            #Creo el formulario con los datos que voy a modificar
+            miFormulario= UserEditForm(initial={ 'email':usuario.email,'first_name':usuario.first_name,'last_name':usuario.last_name}) 
+
+      #Voy al html que me permite editar
+      return render(request, "usuariosApp/editar_perfil.html", {"miFormulario":miFormulario, "usuario":usuario})
 
 
 
