@@ -4,6 +4,7 @@ from postApp.models import Post
 from django.views.generic import ListView
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import DeleteView, CreateView, UpdateView
+from postApp.forms import FormularioPost
 
 def inicio(request):
 
@@ -28,20 +29,33 @@ class VerPost(DetailView):
 
 class UpdatePost(UpdateView):
 
-    model = Post
-    success_url = "postApp/updatePost.html"
-    fields = ['titulo', 'subtitulo', 'contenido', 'imagen']
-
-class BorrarPost(DeleteView):
-
+    form_class= FormularioPost
     model = Post
     success_url = "/postApp/postLista"
 
-class CrearPost(CreateView):
+    def get_context_data(self, **kwargs):
+        contexto = super().get_context_data(**kwargs)
+        contexto.update({
+            'tipo_template': 'Editar' 
+        })
+        return contexto
+class BorrarPost(DeleteView):
 
     model = Post
-    success_url = "postApp/post/list"
-    fields = ['titulo', 'subtitulo', 'contenido', 'imagen']
+    success_url = "postApp/postLista"
+
+class CrearPost(CreateView):
+
+    form_class= FormularioPost
+    model = Post
+    success_url = "/postApp/postLista"
+
+    def get_context_data(self, **kwargs):
+        contexto = super().get_context_data(**kwargs)
+        contexto.update({
+            'tipo_template': 'Publicar'
+        })
+        return contexto
 
 def aboutUs(request):
     return render(request,'postApp/about_us.html')
