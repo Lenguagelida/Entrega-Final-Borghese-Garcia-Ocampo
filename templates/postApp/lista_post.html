@@ -1,5 +1,43 @@
-{% extends 'postApp/index.html' %}
+{% extends 'index.html' %}
 
+{% block saludoInicioDeSesion %}
+{% if request.user.is_authenticated %}   
+
+<a class="navbar-brand">Hola, {{request.user}}</a> 
+
+{% endif %}
+{% endblock saludoInicioDeSesion %}
+
+{% block bienvenido %}
+           
+<h1 class="fw-bolder">¡Bienvenido a Tercer Tiempo!</h1>
+<p class="lead mb-0">Si 90 minutos no son suficientes para vos, entonces este es tu lugar para seguir debatiendo sobre fútbol argentino</p>
+
+{% endblock bienvenido %}
+
+
+{% block editNavBar %}
+                         
+{% if not request.user.is_authenticated  %}
+
+<li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'postlista' %}">Blog</a></li>
+<li class="nav-item"><a class="nav-link" href="{% url 'AboutUs' %}">Acerca de nosotros</a></li>
+<li class="nav-item"><a class="nav-link" href="{% url 'Login' %}">Ingresar</a></li>
+    
+{% endif %}
+    
+
+{% if request.user.is_authenticated %}
+
+<li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'postlista' %}">Blog</a></li>
+<li class="nav-item"><a class="nav-link" href="{% url 'AboutUs' %}">Acerca de nosotros</a></li>
+<li class='nav-item'><a class="nav-link" href="{% url 'EditarPerfil' %}">Editar perfil</a></li>
+<li class='nav-item'><a class="nav-link" href="{% url 'Logout' %}">Cerrar Sesión</a></li>
+
+{% endif %}
+
+
+{% endblock editNavBar %}
 
     {% block blockPosts %}
 

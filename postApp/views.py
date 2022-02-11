@@ -7,7 +7,7 @@ from django.views.generic.edit import DeleteView, CreateView, UpdateView
 
 def inicio(request):
 
-    return render(request, 'index.html')
+    return render(request, 'postApp/inicio.html')
 
 
 def todos_los_post(request):
@@ -42,3 +42,6 @@ class CrearPost(CreateView):
     model = Post
     success_url = "postApp/post/list"
     fields = ['titulo', 'subtitulo', 'contenido', 'imagen']
+
+def aboutUs(request):
+    return render(request,'postApp/about_us.html')
