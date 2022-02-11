@@ -21,21 +21,21 @@ class ListaPosts(ListView):
     model = Post
     template_name= "postApp/lista_post.html"
 
-class VerPost(ListView):
+class VerPost(DetailView):
     
     model = Post
-    template_name= "postApp/lista_post.html"
+    template_name= "postApp/ver_post.html"
 
 class UpdatePost(UpdateView):
 
     model = Post
-    success_url = "postApp/post/list"
+    success_url = "postApp/updatePost.html"
     fields = ['titulo', 'subtitulo', 'contenido', 'imagen']
 
 class BorrarPost(DeleteView):
 
     model = Post
-    success_url = "postApp/post/list"
+    success_url = "/postApp/postLista"
 
 class CrearPost(CreateView):
 

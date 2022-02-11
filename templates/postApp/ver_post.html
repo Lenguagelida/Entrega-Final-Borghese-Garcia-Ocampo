@@ -1,0 +1,39 @@
+{% extends 'index.html' %}
+
+
+    {% block blockPosts %}
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-lg-8">
+                <!-- Post content-->
+                <article>
+                    <!-- Post header-->
+                    <header class="mb-4">
+                        <!-- Post title-->
+                        <h1 class="fw-bolder mb-1">{{object.titulo}}</h1>
+                        <h2 class="fw-bolder mb-1">{{object.subtitulo}}</h2>
+                        <!-- Post meta content-->
+                        <!--<div class="text-muted fst-italic mb-2">Posted on January 1, 2021 by Start Bootstrap</div>-->
+                        <!-- Post categories-->
+                        <!--<a class="badge bg-secondary text-decoration-none link-light" href="#!">Web Design</a>-->
+                        <!--<a class="badge bg-secondary text-decoration-none link-light" href="#!">Freebies</a>-->
+                    </header>
+                    <!-- Preview image figure-->
+                    <figure class="mb-4"><img class="img-fluid rounded" src="{{object.imagen.url}}" alt="Imagen" /></figure>
+                    <!-- Post content-->
+                    <section class="mb-5">
+                        {{object.contenido}}
+                    </section>
+                </article>
+            </div>
+        </div>
+    </div>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <h2>
+        <a href="{% url 'postLista' %}">>Volver</a>
+    </h2>
+    {% endblock blockPosts %}

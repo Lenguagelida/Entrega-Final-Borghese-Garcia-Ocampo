@@ -1,26 +1,24 @@
-{% extends 'postApp/index.html' %}
+{% extends 'index.html' %}
 
 
     {% block blockPosts %}
-
-    
-    {% for o in object_list  %}
-
-    <div class="row">
-        <div class="col-lg-6">
-            <!-- Blog post-->
-            <div class="card" style="max-width: 350px;">
-                <a href="#"><img class="card-img-top" src="{{ o.imagen.url }}" alt="..." /></a>
-                <div class="card-body">
-                    <div class="small text-muted">{{ o.fecha_publicacion }}</div>
-                    <h2 class="card-title h4">{{ o.titulo }}</h2>
-                    <p class="card-text">{{ p.contenido|truncatechars:15 }}</p>
-                    <a class="btn btn-primary" href="#!">Read more →</a>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    {% endfor %}
-
+        
+        <h2>
+            Mis Posts:
+        </h2>
+            {% for post in object_list  %}
+                <li>
+                    <h3>
+                        <a href="{% url 'verPost' post.id %}">{{post.titulo}}</a>
+                        <br>
+                        <p>
+                            |<a href="{% url 'editarPost' post.id %}">>Edita este post</a>|
+                            |<a href="{% url 'borrarPost' post.id %}">>Elimina este post</a>|
+                        </p>
+                    </h3>
+                </li>
+            {% endfor %}
+        <h4>
+            ||<a href="{% url 'crearPost' %}">>Publicar un articulo AQUI</a>||
+        </h4>
     {% endblock blockPosts %}

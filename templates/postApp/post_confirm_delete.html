@@ -1,0 +1,15 @@
+{% extends 'index.html' %}
+
+
+    {% block blockPosts %}
+        <div class="container">
+            <h1>
+                ¿Seguro quieres eliminar este post?
+            </h1>
+            <form method="POST">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-danger">Si, quiero eliminarlo</button>
+                
+            </form>
+        </div>
+    {% endblock blockPosts %}
