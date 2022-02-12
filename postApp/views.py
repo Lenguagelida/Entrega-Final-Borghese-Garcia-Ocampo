@@ -4,7 +4,7 @@ from postApp.models import Post
 from django.views.generic import ListView
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import DeleteView, CreateView, UpdateView
-from postApp.forms import FormularioPost
+#from postApp.forms import FormularioPost
 
 def inicio(request):
 
@@ -27,10 +27,24 @@ class VerPost(DetailView):
     model = Post
     template_name= "postApp/ver_post.html"
 
+class CrearPost(CreateView):
+    
+    #form_class= FormularioPost
+    model = Post
+    fields = ['titulo', 'subtitulo', 'contenido', 'imagen']
+    success_url = "/postApp/postLista"
+
+    def get_context_data(self, **kwargs):
+        contexto = super().get_context_data(**kwargs)
+        contexto.update({
+            'tipo_template': 'Publicar'
+        })
+        return contexto
 class UpdatePost(UpdateView):
 
-    form_class= FormularioPost
+    #form_class= FormularioPost
     model = Post
+    fields = ['titulo', 'subtitulo', 'contenido', 'imagen']
     success_url = "/postApp/postLista"
 
     def get_context_data(self, **kwargs):
@@ -42,20 +56,7 @@ class UpdatePost(UpdateView):
 class BorrarPost(DeleteView):
 
     model = Post
-    success_url = "postApp/postLista"
-
-class CrearPost(CreateView):
-
-    form_class= FormularioPost
-    model = Post
     success_url = "/postApp/postLista"
-
-    def get_context_data(self, **kwargs):
-        contexto = super().get_context_data(**kwargs)
-        contexto.update({
-            'tipo_template': 'Publicar'
-        })
-        return contexto
 
 def aboutUs(request):
     return render(request,'postApp/about_us.html')

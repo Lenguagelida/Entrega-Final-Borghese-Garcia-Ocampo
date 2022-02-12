@@ -45,9 +45,9 @@
     {% block blockPosts %}
     
     <h1>{{ tipo_template }}</h1>
-    <form method="POST">
-        {% csrf_token %}
+    <form method="POST" enctype="multipart/form-data">
         {{ form.as_p }}
+        {% csrf_token %}
         <button type="submit" class="btn btn-primary">Confirmar {{ tipo_template }}</button>
         
     </form>

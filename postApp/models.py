@@ -17,6 +17,10 @@ class Post(models.Model):
     def __str__(self):
         return f'{self.titulo}'
         # - Autor: {self.autor}
+    
+    def delete(self, *args, **kwargs):
+        self.imagen.delete()
+        super().delete(args,kwargs)
 
 
 class Comentario(models.Model):
