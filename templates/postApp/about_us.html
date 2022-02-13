@@ -16,6 +16,7 @@
 
 <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'inicio' %}">Blog</a></li>
 <li class="nav-item"><a class="nav-link" href="{% url 'AboutUs' %}">Acerca de nosotros</a></li>
+<li class="nav-item"><a class="nav-link" href="{% url 'Contacto' %}">Contactanos</a></li>
 <li class="nav-item"><a class="nav-link" href="{% url 'Login' %}">Ingresar</a></li>
     
 {% endif %}
@@ -25,6 +26,7 @@
 
 <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'todosLosPosts' %}">Blog</a></li>
 <li class="nav-item"><a class="nav-link" href="{% url 'AboutUs' %}">Acerca de nosotros</a></li>
+<li class="nav-item"><a class="nav-link" href="{% url 'Contacto' %}">Contactanos</a></li>
 <div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
     <ul class="navbar-nav">
       <li class="nav-item dropdown">
@@ -32,8 +34,9 @@
           Hola, {{request.user}}
         </a>
         <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
-          <li><a class="dropdown-item" href="{% url 'EditarPerfil' %}">Editar Perfil</a></li>
-          <li><a class="dropdown-item" href="{% url 'Logout' %}">Cerrar Sesión</a></li>
+			<li><a class="dropdown-item" href="{% url 'crearPost' %}">Hacer un Post</a></li>	
+          	<li><a class="dropdown-item" href="{% url 'EditarPerfil' %}">Editar Perfil</a></li>
+          	<li><a class="dropdown-item" href="{% url 'Logout' %}">Cerrar Sesión</a></li>
         </ul>
       </li>
     </ul>

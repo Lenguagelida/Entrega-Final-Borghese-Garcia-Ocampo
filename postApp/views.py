@@ -60,3 +60,6 @@ class BorrarPost(DeleteView):
 
 def aboutUs(request):
     return render(request,'postApp/about_us.html')
+
+def contacto(request):
+    return render(request,'postApp/contacto.html')
