@@ -13,7 +13,6 @@
                         
 {% if not request.user.is_authenticated  %}
 
-<li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'todosLosPosts' %}">Blog</a></li>
 <li class="nav-item"><a class="nav-link" href="{% url 'AboutUs' %}">Acerca de nosotros</a></li>
 <li class="nav-item"><a class="nav-link" href="{% url 'Login' %}">Ingresar</a></li>
     
@@ -22,7 +21,6 @@
 
 {% if request.user.is_authenticated %}
 
-<li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'todosLosPosts' %}">Blog</a></li>
 <li class="nav-item"><a class="nav-link" href="{% url 'AboutUs' %}">Acerca de nosotros</a></li>
 <div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
     <ul class="navbar-nav">

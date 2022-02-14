@@ -1,6 +1,5 @@
 {% extends 'index.html' %}
 
-
 {% block barraBusqueda %}
 
 <div class="row" style="width: 400px">
@@ -38,7 +37,6 @@
 
 {% if not request.user.is_authenticated  %}
 
-<li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'todosLosPosts' %}">Blog</a></li>
 <li class="nav-item"><a class="nav-link" href="{% url 'AboutUs' %}">Acerca de nosotros</a></li>
 <li class="nav-item"><a class="nav-link" href="{% url 'Contacto' %}">Contactanos</a></li>
 <li class="nav-item"><a class="nav-link" href="{% url 'Login' %}">Ingresar</a></li>
@@ -48,7 +46,6 @@
 
 {% if request.user.is_authenticated %}
 
-<li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'todosLosPosts' %}">Blog</a></li>
 <li class="nav-item"><a class="nav-link" href="{% url 'AboutUs' %}">Acerca de nosotros</a></li>
 <li class="nav-item"><a class="nav-link" href="{% url 'Contacto' %}">Contactanos</a></li>
 <div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
@@ -77,14 +74,26 @@
 
 {% endblock logInLogOut %}
 
+{% block backgroundImage %}
+
+<div
+    class="bg-image"
+    style="
+    background-image: url('https://www.axis.com/sites/axis/files/styles/landscape_1920_x_768_jpg/public/2020-09/soccer_stadium_spectators_silhouette_2009_3840x1536_0.jpg?h=71e592e0&itok=LI607JsK');
+    height: 70vh;
+    "
+></div>
+
+{% endblock backgroundImage %}
+
 
 {% block blockPosts %}
 
 
 {% if posts %}
-  
+
+{% for p in posts %}
 <div class="container">
-  {% for p in posts %}
   <div class="row mb-2">
     <div class="col-md-6">
         <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
@@ -100,9 +109,9 @@
         </div>
       </div>
     </div>
-  {% endfor %}
 </div>    
 </div>
+{% endfor %}
 
 {% else %}
 
@@ -119,7 +128,7 @@
                 <a href="{% url 'verPost' p.id %}" class="stretched-link">Ver post</a>
             </div>
         <div class="col-auto d-none d-lg-block">
-            <img src="{{ p.imagen.url }}" width="200" height="250">
+            <img src="{{ p.imagen.url }}" width="350" height="250">
         </div>
       </div>
     </div>

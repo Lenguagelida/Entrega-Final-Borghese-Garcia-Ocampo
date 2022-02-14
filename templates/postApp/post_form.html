@@ -5,7 +5,6 @@
                         
 {% if not request.user.is_authenticated  %}
 
-<li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'todosLosPosts' %}">Blog</a></li>
 <li class="nav-item"><a class="nav-link" href="{% url 'AboutUs' %}">Acerca de nosotros</a></li>
 <li class="nav-item"><a class="nav-link" href="{% url 'Contacto' %}">Contactanos</a></li>
 <li class="nav-item"><a class="nav-link" href="{% url 'Login' %}">Ingresar</a></li>
@@ -15,7 +14,6 @@
 
 {% if request.user.is_authenticated %}
 
-<li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'todosLosPosts' %}">Blog</a></li>
 <li class="nav-item"><a class="nav-link" href="{% url 'AboutUs' %}">Acerca de nosotros</a></li>
 <li class="nav-item"><a class="nav-link" href="{% url 'Contacto' %}">Contactanos</a></li>
 <div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
@@ -48,7 +46,7 @@
     background: #f3f6f7 !important;
   }
   .user_card {
-    width: 550px;
+    width: 850px;
     margin-top: auto;
     margin-bottom: auto;
     background: #9bc5a6;
@@ -119,7 +117,8 @@
     <div class="d-flex justify-content-center h-100">
       <div class="user_card">
         <div class="d-flex justify-content-center">
-          <h3 id="form-title">{{ tipo_template }}</h3>
+          <!-- <h3 id="form-title">{{ tipo_template }}</h3> -->
+          <h3 id="form-title">Editar Publicación</h3>
         </div>
         <div class="d-flex justify-content-center form_container">
 
@@ -132,7 +131,8 @@
                     {{form.as_p}}
                 </div>
             <div class="d-flex justify-content-center mt-3 login_container">
-              <button type="submit" class="btn btn-primary">Confirmar {{ tipo_template }}</button>
+              <!-- <button type="submit" class="btn btn-primary">Confirmar {{ tipo_template }}</button> -->
+              <button type="submit" class="btn btn-primary">Publicar</button>
               </div>
           </form>
         </div>

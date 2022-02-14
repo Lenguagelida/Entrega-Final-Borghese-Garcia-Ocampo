@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from postApp.models import Post
+from postApp.models import Post,Categoria
 from django.db.models import Q
 from django.views.generic import ListView
 from django.views.generic.detail import DetailView
@@ -19,12 +19,6 @@ def inicio(request):
         posts = Post.objects.all().order_by('-fecha_publicacion')
         return render(request, 'postApp/inicio.html', {'posts': posts})
 
-
-def todos_los_post(request):
-
-    posts = Post.objects.all().order_by('-fecha_publicacion')
-
-    return render(request, 'postApp/todos_los_post.html', {'posts': posts})
 
 class ListaPosts(ListView):
 
