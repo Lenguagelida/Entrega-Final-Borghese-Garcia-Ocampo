@@ -1,14 +1,23 @@
 from django.shortcuts import render
 from postApp.models import Post
-
+from django.db.models import Q
 from django.views.generic import ListView
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import DeleteView, CreateView, UpdateView
 #from postApp.forms import FormularioPost
 
 def inicio(request):
-
-    return render(request, 'postApp/inicio.html')
+    queryset = request.GET.get("buscar")
+    if queryset:
+        posts = Post.objects.filter(
+            Q(titulo__icontains = queryset) |
+            Q(subtitulo__icontains = queryset) |
+            Q(contenido__icontains = queryset)
+        ).distinct()
+        return render(request,'postApp/inicio.html',{'posts':posts})
+    else:
+        posts = Post.objects.all().order_by('-fecha_publicacion')
+        return render(request, 'postApp/inicio.html', {'posts': posts})
 
 
 def todos_los_post(request):
@@ -63,3 +72,15 @@ def aboutUs(request):
 
 def contacto(request):
     return render(request,'postApp/contacto.html')
+
+def buscar(request):
+    queryset = request.GET.get("buscar")
+    # print(queryset)
+    posts = Post.objects.filter(estado = True)
+    if queryset:
+        posts = Post.objects.filter(
+            Q(titulo__icontains = queryset) |
+            Q(subtitulo__icontains = queryset) |
+            Q(contenido__icontains = queryset)
+        ).distinct()
+    return render(request,'postApp/inicio.html',{'posts':posts})

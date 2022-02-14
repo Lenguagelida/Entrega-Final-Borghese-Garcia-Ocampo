@@ -12,5 +12,6 @@ urlpatterns = [
     path('editarPost/<pk>/', views.UpdatePost.as_view(), name='editarPost'),
     path('borrarPost/<pk>/', views.BorrarPost.as_view(), name='borrarPost'),
     path('contacto',views.contacto, name='Contacto'),
+    # path('buscar',views.buscar, name='buscar'),
     
 ]
