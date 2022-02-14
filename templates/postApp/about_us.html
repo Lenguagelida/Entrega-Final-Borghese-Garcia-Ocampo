@@ -1,102 +1,104 @@
-{% extends 'index.html' %}
+<!DOCTYPE html>
+<html style="font-size: 16px;">
+  <head>
 
-{% block saludoInicioDeSesion %}
-{% if request.user.is_authenticated %}   
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div class="container">
+        <a class="navbar-brand" href="{% url 'inicio' %}">Inicio</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+           </ul>
+        </div>
+      </div>
+    </nav>
+  
+    <title>About Us</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
 
-<a class="navbar-brand">Hola, {{request.user}}</a> 
-
-{% endif %}
-{% endblock saludoInicioDeSesion %}
-
-
-{% block editNavBar %}
-
-
-{% if not request.user.is_authenticated  %}
-
-<li class="nav-item"><a class="nav-link" href="{% url 'AboutUs' %}">Acerca de nosotros</a></li>
-<li class="nav-item"><a class="nav-link" href="{% url 'Contacto' %}">Contactanos</a></li>
-<li class="nav-item"><a class="nav-link" href="{% url 'Login' %}">Ingresar</a></li>
     
-{% endif %}
+	{% load static %}
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <meta name="page_type" content="np-template-header-footer-from-plugin">
+    <title>About</title>
+    <link rel="stylesheet" href="{% static 'css/nicepage.css' %}" media="screen">
+<link rel="stylesheet" href="{% static 'css/About.css' %}" media="screen">
+    <script class="u-script" type="text/javascript" src="{% static 'js/jquery.js' %}" defer=""></script>
+    <script class="u-script" type="text/javascript" src="{% static 'js/nicepage.js' %}" defer=""></script>
+    <meta name="generator" content="Nicepage 4.4.3, nicepage.com">
+    <link id="u-theme-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i">
+    <link id="u-page-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i">
     
-
-{% if request.user.is_authenticated %}
-
-<li class="nav-item"><a class="nav-link" href="{% url 'AboutUs' %}">Acerca de nosotros</a></li>
-<li class="nav-item"><a class="nav-link" href="{% url 'Contacto' %}">Contactanos</a></li>
-<div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
-    <ul class="navbar-nav">
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-          Hola, {{request.user}}
-        </a>
-        <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
-			<li><a class="dropdown-item" href="{% url 'crearPost' %}">Hacer un Post</a></li>	
-          	<li><a class="dropdown-item" href="{% url 'EditarPerfil' %}">Editar Perfil</a></li>
-          	<li><a class="dropdown-item" href="{% url 'Logout' %}">Cerrar Sesión</a></li>
-        </ul>
-      </li>
-    </ul>
-  </div>
-
-{% endif %}
-                             
-{% endblock editNavBar %}
+    
+    <script type="application/ld+json">{
+		"@context": "http://schema.org",
+		"@type": "Organization",
+		"name": "",
+		"logo": "images/default-logo.png"
+}</script>
+    <meta name="theme-color" content="#478ac9">
+    <meta property="og:title" content="About">
+    <meta property="og:type" content="website">
+  </head>
+  <body class="u-body u-xl-mode">
 
 
-{% block logInLogOut %}
-	<style>
-		body,
-		html {
-			margin: 0;
-			padding: 0;
-			height: 100%;
-			background: #f3f6f7 !important;
-		}
-		.user_card {
-			width: 550px;
-			margin-top: auto;
-			margin-bottom: auto;
-			background: #9bc5a6;
-			position: relative;
-			display: flex;
-			justify-content: center;
-			flex-direction: column;
-			padding: 10px;
-			box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-			-webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-			-moz-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-			border-radius: 5px;
 
-		}
-		#messages{
-			background-color: grey;
-			color: #fff;
-			padding: 10px;
-			margin-top: 10px;
-		}
-	</style>
-
-</head>
-<body>
-	<div class="container h-100">
-		<div class="d-flex justify-content-center h-100">
-			<div class="user_card">
-				<div class="d-flex justify-content-center">
-
-
-					<h3 id="form-title">Acerca de nosotros</h3>
-                 
-				</div>
-				<div class="d-flex justify-content-center form_container">
-                    <p>Valentín Gustavo Garcia, Daniel Borghese y David Ocampo</p>
-
-				</div>
-		
-			</div>
-		</div>
-	</div>
-</body>
-
-{% endblock logInLogOut %}
+      </div></header>
+    <section class="u-clearfix u-section-1" id="carousel_df56">
+      <div class="u-clearfix u-sheet u-valign-middle u-sheet-1">
+        <div class="u-clearfix u-expanded-width u-layout-wrap u-layout-wrap-1">
+          <div class="u-gutter-0 u-layout">
+            <div class="u-layout-row">
+              <div class="u-container-style u-layout-cell u-size-20 u-layout-cell-1">
+                <div class="u-container-layout u-container-layout-1">
+                  <div class="u-image u-image-circle u-image-1" alt="" data-image-width="800" data-image-height="1034"></div>
+                  <h6 class="u-align-justify u-custom-font u-font-montserrat u-text u-text-1"> Valentín Gustavo Garcia</h6>
+                  <p class="u-align-justify u-custom-font u-font-montserrat u-text u-text-2"> In mollis nunc sed id semper risus in hendrerit gravida. Aliquet enim tortor at auctor urna nunc id cursus. Risus at ultrices mi tempus imperdiet. Sapien pellentesque habitant morbi tristique senectus et netus. Id cursus metus aliquam eleifend mi in. Quis commodo odio aenean sed. Sollicitudin ac orci phasellus egestas tellus. Id velit ut tortor pretium.</p>
+                </div>
+              </div>
+              <div class="u-align-left-xs u-container-style u-layout-cell u-size-20 u-layout-cell-2">
+                <div class="u-container-layout u-valign-bottom-sm u-valign-bottom-xl u-valign-top-md u-container-layout-2">
+                  <h6 class="u-align-left-lg u-align-left-md u-align-left-sm u-align-left-xl u-custom-font u-font-montserrat u-text u-text-3"> Daniel Borghese</h6>
+                  <p class="u-align-justify-lg u-align-justify-md u-align-justify-sm u-align-justify-xl u-custom-font u-font-montserrat u-text u-text-4"> In mollis nunc sed id semper risus in hendrerit gravida. Aliquet enim tortor at auctor urna nunc id cursus. Risus at ultrices mi tempus imperdiet. Sapien pellentesque habitant morbi tristique senectus et netus. Id cursus metus aliquam eleifend mi in. Quis commodo odio aenean sed. Sollicitudin ac orci phasellus egestas tellus. Id velit ut tortor pretium.</p>
+                  <div class="u-image u-image-circle u-image-2" alt="" data-image-width="800" data-image-height="979"></div>
+                </div>
+              </div>
+              <div class="u-container-style u-layout-cell u-size-20 u-layout-cell-3">
+                <div class="u-container-layout u-valign-top u-container-layout-3">
+                  <div class="u-image u-image-circle u-image-3" alt="" data-image-width="800" data-image-height="710"></div>
+                  <h6 class="u-align-justify u-custom-font u-font-montserrat u-text u-text-5">David Ocampo</h6>
+                  <p class="u-align-justify u-custom-font u-font-montserrat u-text u-text-6">  No puedo tengo furbo. No puedo tengo furbo. No puedo tengo furbo. No puedo tengo furbo.<br> No puedo tengo furbo. No puedo tengo furbo. No puedo tengo furbo. No puedo tengo furbo No puedo tengo furbo. No puedo tengo furbo. No puedo tengo furbo. No puedo tengo furbo..&nbsp; No puedo tengo furbo. No puedo tengo furbo. No puedo tengo furbo. No puedo tengo furbo. No puedo tengo furbo.<br>
+                    <br>Puedes contactarme a traves de<br>
+                    <a href="https://www.linkedin.com/in/david-ocampo-34380171/" class="u-active-none u-border-none u-btn u-button-link u-button-style u-hover-none u-none u-text-palette-1-base u-btn-1" target="_blank">Linkedin</a>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    
+    <footer class="u-align-center u-clearfix u-footer u-grey-80 u-footer" id="sec-6c79"><div class="u-clearfix u-sheet u-sheet-1">
+        <p class="u-small-text u-text u-text-variant u-text-1">Está página es el proyecto final del curso Python, Comisión: #AAAAAA</p>
+      </div></footer>
+    <section class="u-backlink u-clearfix u-grey-80">
+      <a class="u-link" href="https://us.coderhouse.com/" target="_blank">
+        <span>Coderhouse</span>
+      </a>
+      <p class="u-text">
+        <span>para más información acerca del curso haz click en el siguiente enlace</span>
+      </p>
+      <a class="u-link" href="https://us.coderhouse.com/online/python" target="_blank">
+        <span>Python</span>
+      </a>. 
+    </section>
+  </body>
+</html>
