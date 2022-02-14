@@ -1,5 +1,27 @@
 {% extends 'index.html' %}
 
+
+{% block barraBusqueda %}
+
+<div class="row" style="width: 400px">
+  <div class="col-md-12 search">
+    <form method="get">
+        <div id="custom-search-input">
+          <div class="input-group col-md-12">
+            <input type="text" class="form-control" style="height: 29px" placeholder="Buscar..." name="buscar" value = "{{ request.GET.buscar }}">
+            <span class="input-group-list">
+              <i class="icon icon-search"></i>
+              <button type="submit" class="boton btn-success">Buscar</button>
+            </span>
+          </div>
+        </div>
+    </form>
+  </div>
+</div>
+
+{% endblock barraBusqueda %}
+
+
 {% block bienvenido %}
 
 <h1 class="fw-bolder">¡Bienvenido a Tercer Tiempo!</h1>
@@ -47,6 +69,14 @@
 {% endif %}
 
 {% endblock editNavBar %}
+
+
+{% block logInLogOut %}
+    
+<h1>{{mensaje}}</h1>
+
+{% endblock logInLogOut %}
+
 
 {% block blockPosts %}
 

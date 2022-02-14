@@ -26,25 +26,12 @@
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <div class="container">
                 <a class="navbar-brand" href="{% url 'inicio' %}">Inicio</a>
-                <!-- <input class="form-control" style="width : 400px; height: 35px" type="text" placeholder="¿Qué buscás?..." aria-label="¿Qué buscás?..." aria-describedby="button-search" />
-                <button class="btn btn-success" id="button-search" style="width: 70px;height: 35px" name="buscar" type="submit">Buscar</button> -->
-                <!-- <div class="container"> -->
-                    <div class="row" style="width: 400px">
-                      <div class="col-md-12 search">
-                        <form method="get">
-                            <div id="custom-search-input">
-                              <div class="input-group col-md-12">
-                                <input type="text" class="form-control" style="height: 29px" placeholder="Buscar..." name="buscar" value = "{{ request.GET.buscar }}">
-                                <span class="input-group-list">
-                                  <i class="icon icon-search"></i>
-                                  <button type="submit" class="boton btn-success">Buscar</button>
-                                </span>
-                              </div>
-                            </div>
-                        </form>
-                      </div>
-                    </div>
-                  <!-- </div> -->
+                
+                {% block barraBusqueda %}
+
+                {% endblock barraBusqueda %}
+
+                
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
