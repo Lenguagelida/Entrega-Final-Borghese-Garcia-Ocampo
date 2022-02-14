@@ -13,7 +13,7 @@ def inicio(request):
 
 def todos_los_post(request):
 
-    posts = Post.objects.all()
+    posts = Post.objects.all().order_by('-fecha_publicacion')
 
     return render(request, 'postApp/todos_los_post.html', {'posts': posts})
 
@@ -31,7 +31,7 @@ class CrearPost(CreateView):
     
     #form_class= FormularioPost
     model = Post
-    fields = ['titulo', 'subtitulo', 'contenido', 'imagen']
+    fields = ['titulo', 'subtitulo', 'categoria', 'autor', 'contenido', 'imagen']
     success_url = "/postApp/postLista"
 
     def get_context_data(self, **kwargs):
@@ -44,7 +44,7 @@ class UpdatePost(UpdateView):
 
     #form_class= FormularioPost
     model = Post
-    fields = ['titulo', 'subtitulo', 'contenido', 'imagen']
+    fields = ['titulo', 'subtitulo', 'categoria', 'autor', 'contenido', 'imagen']
     success_url = "/postApp/postLista"
 
     def get_context_data(self, **kwargs):

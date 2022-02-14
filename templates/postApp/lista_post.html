@@ -43,25 +43,37 @@
 
 
 {% endblock editNavBar %}
-
+  <br><br>
+{% if user.is_authenticated %}
+  <div class="container">
     {% block blockPosts %}
         
         <h2>
             Mis Posts:
+            <hr>
         </h2>
             {% for post in object_list  %}
-                <li>
-                    <h3>
-                        <a href="{% url 'verPost' post.id %}">{{post.titulo}}</a>
-                        <br>
+                <ul>
+                    <h4>
+                        <p>{{ post.titulo }}</p>
+                        <div class="mb-1 text-muted">{{post.fecha_publicacion}}</div>
                         <p>
-                            |<a href="{% url 'editarPost' post.id %}">>Edita este post</a>|
-                            |<a href="{% url 'borrarPost' post.id %}">>Elimina este post</a>|
+                            |<a class="btn btn-info" href="{% url 'verPost' post.id %}" role="button">Ver post</a>|
+                            |<a class="btn btn-secondary" href="{% url 'editarPost' post.id %}" role="button">Edita este post</a>|
+                            |<a class="btn btn-danger" href="{% url 'borrarPost' post.id %}" role="button">Eliminar este post</a>|
                         </p>
-                    </h3>
-                </li>
+                    </h4>
+                </ul>
             {% endfor %}
         <h4>
-            ||<a href="{% url 'crearPost' %}">>Publicar un articulo AQUI</a>||
+            ||<a class="btn btn-primary" href="{% url 'crearPost' %}" role="button">Pubiica algo nuevo</a>||
         </h4>
     {% endblock blockPosts %}
+  </div>
+{% else %}
+  
+  <div class="alert alert-warning" role="alert">
+    Inicia sesión para poder postear algo!. <a href="{% url 'Login' %}" class="alert-link">Iniciar Sesión</a>. Ahí encontraras el boton para poder registrarte tambien.
+  </div>
+
+{% endif %} 

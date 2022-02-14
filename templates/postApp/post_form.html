@@ -111,49 +111,41 @@
 
 
 </head>
-<body>
-<div class="container h-100">
-  <div class="d-flex justify-content-center h-100">
-    <div class="user_card">
-      <div class="d-flex justify-content-center">
 
+{% if user.is_authenticated %}
 
-        <h3 id="form-title">{{ tipo_template }}</h3>
-               
-      </div>
-      <div class="d-flex justify-content-center form_container">
-                  
-        <form method="POST" action="">
-                      {% csrf_token %}
-          <div class="input-group mb-3">
-              <div class="input-group-append">
+  <body>
+  <div class="container h-100">
+    <div class="d-flex justify-content-center h-100">
+      <div class="user_card">
+        <div class="d-flex justify-content-center">
+          <h3 id="form-title">{{ tipo_template }}</h3>
+        </div>
+        <div class="d-flex justify-content-center form_container">
+
+          <form method="POST" action="" enctype="multipart/form-data">
+                        {% csrf_token %}
+            <div class="input-group mb-3">
+                <div class="input-group-append">
+                  </div>
+                    {{form.media}}
+                    {{form.as_p}}
                 </div>
-                  {{form.as_p}}
+            <div class="d-flex justify-content-center mt-3 login_container">
+              <button type="submit" class="btn btn-primary">Confirmar {{ tipo_template }}</button>
               </div>
-          <div class="d-flex justify-content-center mt-3 login_container">
-             <button type="submit" class="btn btn-primary">Confirmar {{ tipo_template }}</button>
-             </div>
-        </form>
+          </form>
+        </div>
       </div>
     </div>
   </div>
-</div>
-</body>
-    
+  </body>
+{% else %}
 
+  <div class="alert alert-warning" role="alert">
+    Inicia sesión para poder postear algo!. <a href="{% url 'Login' %}" class="alert-link">Iniciar Sesión</a>. Ahí encontraras el boton para poder registrarte tambien.
+  </div>
 
+{% endif %}
 
 {% endblock logInLogOut %}
-
-
-<!-- <input class="btn login_btn" type="submit" value="Guardar"> -->
-
-
-
-<!-- <h1>{{ tipo_template }}</h1>
-<form method="POST" enctype="multipart/form-data">
-    {{ form.as_p }}
-    {% csrf_token %}
-    <button type="submit" class="btn btn-primary">Confirmar {{ tipo_template }}</button>
-    
-</form> -->
