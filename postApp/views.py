@@ -1,10 +1,17 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from postApp.models import Post,Categoria
 from django.db.models import Q
 from django.views.generic import ListView
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import DeleteView, CreateView, UpdateView
 #from postApp.forms import FormularioPost
+
+#Import para enviar correos
+from postApp.forms import ContactEmailForm
+from django.core.mail import send_mail, BadHeaderError
+from django.conf import settings
+from django.http import HttpResponse
+
 
 def inicio(request):
     queryset = request.GET.get("buscar")
@@ -64,8 +71,29 @@ class BorrarPost(DeleteView):
 def aboutUs(request):
     return render(request,'postApp/about_us.html')
 
-def contacto(request):
-    return render(request,'postApp/contacto.html')
+#Envio de correo desde Contacto
+def contact(request):
+    if request.method == 'POST':
+        form = ContactEmailForm(request.POST)
+        if form.is_valid():
+            subject = "Tienes una nueva consulta desde el blog Tercer Tiempo" 
+            body = {
+            'first_name': form.cleaned_data['first_name'], 
+            'last_name': form.cleaned_data['last_name'], 
+            'email': form.cleaned_data['email_address'], 
+            'message':form.cleaned_data['message'], 
+            }
+            message = "\n".join(body.values())
+
+            try:
+                send_mail(subject, message, 'blogtercertiempo2022@gmail.com', ['blogtercertiempo2022@gmail.com']) 
+            except BadHeaderError:
+                return HttpResponse('Invalid header found.')
+            return redirect ("main:inicio")
+      
+    form = ContactEmailForm()
+    return render(request, "postApp/contacto.html", {'form':form})
+
 
 def buscar(request):
     queryset = request.GET.get("buscar")
