@@ -48,6 +48,7 @@ class CrearPost(CreateView):
     fields = ['titulo', 'subtitulo', 'categoria', 'autor', 'contenido', 'imagen']
     success_url = "/postApp/postLista"
 
+    @allowed_users(allowed_roles=['lrectores'])
     def get_context_data(self, **kwargs):
         contexto = super().get_context_data(**kwargs)
         contexto.update({
@@ -76,6 +77,7 @@ def aboutUs(request):
     return render(request,'postApp/about_us.html')
 
 #Envio de correo desde Contacto
+@allowed_users(allowed_roles=['lectores'])
 def contact(request):
     if request.method == 'POST':
         form = ContactEmailForm(request.POST)
@@ -94,7 +96,7 @@ def contact(request):
             except BadHeaderError:
                 return HttpResponse('Invalid header found.')
             return HttpResponse('Tu correo ha sido enviado con éxito. En al menos 48 horas nuestro equipo de soporte te va a contactar.')
-      
+
     form = ContactEmailForm()
     return render(request, "postApp/contacto.html", {'form':form})
 
