@@ -12,5 +12,8 @@ urlpatterns = [
     path('borrarPost/<pk>/', views.BorrarPost.as_view(), name='borrarPost'),
     path('contacto/',views.contact, name='Contacto'),
     # path('buscar',views.buscar, name='buscar'),
-    
+    path('periodismo/',views.periodismo,name='CategoriaPeriodismo'),
+    path('qatar2022/',views.qatar2022,name='Qatar2022'),
+    path('futbolargentino/',views.futbol_argentino,name='Futbolargentino'),
+    path('futbolinternacional/',views.futbol_internacional,name='Futbolinternacional'),
 ]

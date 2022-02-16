@@ -106,3 +106,20 @@ def buscar(request):
             Q(contenido__icontains = queryset)
         ).distinct()
     return render(request,'postApp/inicio.html',{'posts':posts})
+
+
+def periodismo(request):
+    posts=Post.objects.filter(categoria__nombre = 'Periodismo')
+    return render(request,'postApp/categoria_periodismo.html',{'posts':posts})
+    
+def qatar2022(request):
+    posts=Post.objects.filter(categoria__nombre = 'Qatar 2022')
+    return render(request,'postApp/categoria_periodismo.html',{'posts':posts})
+
+def futbol_argentino(request):
+    posts=Post.objects.filter(categoria__nombre = 'Futbol Argentino')
+    return render(request,'postApp/categoria_periodismo.html',{'posts':posts})
+
+def futbol_internacional(request):
+    posts=Post.objects.filter(categoria__nombre = 'Futbol Internacional')
+    return render(request,'postApp/categoria_periodismo.html',{'posts':posts})
