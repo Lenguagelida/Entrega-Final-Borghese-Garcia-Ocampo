@@ -12,6 +12,7 @@ from django.core.mail import send_mail, BadHeaderError
 from django.conf import settings
 from django.http import HttpResponse
 
+#from .decorators import unauthenticated_user, allowed_users
 
 def inicio(request):
     queryset = request.GET.get("buscar")
@@ -89,7 +90,7 @@ def contact(request):
                 send_mail(subject, message, 'blogtercertiempo2022@gmail.com', ['blogtercertiempo2022@gmail.com']) 
             except BadHeaderError:
                 return HttpResponse('Invalid header found.')
-            return redirect ("main:inicio")
+            return HttpResponse('Tu correo ha sido enviado con éxito. En al menos 48 horas nuestro equipo de soporte te va a contactar.')
       
     form = ContactEmailForm()
     return render(request, "postApp/contacto.html", {'form':form})
