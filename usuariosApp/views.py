@@ -13,7 +13,10 @@ from usuariosApp.forms import UserRegisterForm, UserEditForm
 from postApp.models import Post
 
 
-# login_required(login_url='login')
+#Decorators
+from postApp.decorators import unauthenticated_user, allowed_users
+from django.contrib.auth.decorators import login_required
+
 
 def inicio(request):
     queryset = request.GET.get("buscar")

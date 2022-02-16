@@ -12,7 +12,10 @@ from django.core.mail import send_mail, BadHeaderError
 from django.conf import settings
 from django.http import HttpResponse
 
-#from .decorators import unauthenticated_user, allowed_users
+#Decorators
+from django.contrib.auth.decorators import login_required
+from .decorators import unauthenticated_user, allowed_users, only_escritor
+
 
 def inicio(request):
     queryset = request.GET.get("buscar")
