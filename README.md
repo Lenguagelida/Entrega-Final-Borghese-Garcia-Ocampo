@@ -1,28 +1,38 @@
 # Entrega-Final-Borghese-Garcia-Ocampo
 Blog Proyecto Final Coderhouse Python Django
 
+=======================================================
 
+Autores:
+
+Valentín Gustavo Garcia
+
+Daniel Borghese
+
+David Ocampo
+
+=======================================================
 
 Progreso de funcionalidades:
 
 
-NavBar: -> Valentin
+NavBar: Valentin
 
 Home: Todos
 
 About: Valentin, David
 
-Pages: None
+Pages: Daniel
 
-Login: Completado -> David
+Login: David
 
-Signup: Completado -> David
+Logout: David
 
-Messages: David
+Register me: David
 
 Profile: David
 
-Logout: Completado -> David
+Messages: N/A
 
 Get pages:
 
