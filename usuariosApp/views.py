@@ -18,18 +18,6 @@ from postApp.decorators import unauthenticated_user, allowed_users
 from django.contrib.auth.decorators import login_required
 
 
-def inicio(request):
-    queryset = request.GET.get("buscar")
-    if queryset:
-        posts = Post.objects.filter(
-            Q(titulo__icontains = queryset) |
-            Q(subtitulo__icontains = queryset) |
-            Q(contenido__icontains = queryset)
-        ).distinct()
-        return render(request,'postApp/inicio.html',{'posts':posts})
-    else:
-        posts = Post.objects.all().order_by('-fecha_publicacion')
-        return render(request, 'postApp/inicio.html', {'posts': posts})
 
 # Register
 def register(request):

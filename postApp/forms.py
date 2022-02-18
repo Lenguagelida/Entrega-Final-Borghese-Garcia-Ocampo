@@ -1,5 +1,5 @@
 from django import forms
-from .models import Post
+from .models import Post, Comentario
 
 #Formulario contacto para enviar email
 class ContactEmailForm(forms.Form):
@@ -7,3 +7,8 @@ class ContactEmailForm(forms.Form):
     last_name = forms.CharField(max_length = 50)
     email_address = forms.EmailField(max_length = 150)
     message = forms.CharField(widget = forms.Textarea, max_length = 2000)
+
+class ComentarioForm(forms.ModelForm):
+    class Meta:
+        model = Comentario
+        fields = ('contenido',)

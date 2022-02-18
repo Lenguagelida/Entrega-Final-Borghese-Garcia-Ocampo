@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from ckeditor.fields import RichTextField
 
 
+
 class Categoria(models.Model):
     nombre = models.CharField(
         'categoria', max_length=100, null=False, blank=False)
@@ -12,9 +13,9 @@ class Categoria(models.Model):
 
 
 class Post(models.Model):
-    titulo = models.CharField('titulo', max_length=50, null=False, blank=False)
+    titulo = models.CharField('titulo', max_length=500, null=False, blank=False)
     subtitulo = models.CharField(
-        'subtitulo', max_length=100, null=False, blank=False)
+        'subtitulo', max_length=500, null=False, blank=False)
     contenido = RichTextField('contenido', null=False, blank=False)
     imagen = models.ImageField(
         upload_to='imagenes_post', null=True, blank=True)
@@ -24,6 +25,7 @@ class Post(models.Model):
     fecha_publicacion = models.DateTimeField(auto_now_add=True)
     # Agrega fecha y actualiza segun la fecha de la edicion:
     fecha_edicion = models.DateTimeField(auto_now=True)
+    likes = models.ManyToManyField(User, related_name='likes_posts')
 
     def __str__(self):
         return f'{self.titulo} - Autor: {self.autor}'
@@ -32,37 +34,19 @@ class Post(models.Model):
         self.imagen.delete()
         super().delete(args, kwargs)
 
+    def total_likes(self):
+        return self.likes.count()
+
+    @property
+    def get_comentarios_count(self):
+        return self.comentarios_set.all().count()
 
 class Comentario(models.Model):
     autor = models.ForeignKey(User, on_delete=models.CASCADE)
-    post = models.ForeignKey(Post, on_delete=models.CASCADE)
+    post = models.ForeignKey(
+        Post, related_name="comentarios", on_delete=models.CASCADE)
     fecha_publicacion = models.DateTimeField(auto_now_add=True)
     contenido = models.TextField('contenido', null=False, blank=False)
-
-    def __str__(self):
-        return f'{self.autor}'
-
-
-class Vistas(models.Model):
-    autor = models.ForeignKey(User, on_delete=models.CASCADE)
-    post = models.ForeignKey(Post, on_delete=models.CASCADE)
-    fecha_publicacion = models.DateTimeField(auto_now_add=True)
-
-    def __str__(self):
-        return f'{self.autor}'
-
-
-class MeGusta(models.Model):
-    autor = models.ForeignKey(User, on_delete=models.CASCADE)
-    post = models.ForeignKey(Post, on_delete=models.CASCADE)
-
-    def __str__(self):
-        return f'{self.autor}'
-
-
-class NoMeGusta(models.Model):
-    autor = models.ForeignKey(User, on_delete=models.CASCADE)
-    post = models.ForeignKey(Post, on_delete=models.CASCADE)
 
     def __str__(self):
         return f'{self.autor}'

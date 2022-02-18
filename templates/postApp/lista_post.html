@@ -1,14 +1,5 @@
 {% extends 'index.html' %}
 
-
-{% block bienvenido %}
-        
-<h1 class="fw-bolder">¡Bienvenido a Tercer Tiempo!</h1>
-<p class="lead mb-0">Si 90 minutos no son suficientes para vos, entonces este es tu lugar para seguir debatiendo sobre fútbol argentino</p>
-
-{% endblock bienvenido %}
-
-
 {% block editNavBar %}
                         
 {% if not request.user.is_authenticated  %}
@@ -29,7 +20,7 @@
           Hola, {{request.user}}
         </a>
         <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
-          <li><a class="dropdown-item" href="{% url 'crearPost' %}">Hacer un Post</a></li>
+          <li><a class="dropdown-item" href="{% url 'postLista' %}">Administrar Posts</a></li>
           <li><a class="dropdown-item" href="{% url 'EditarPerfil' %}">Editar Perfil</a></li>
           <li><a class="dropdown-item" href="{% url 'Logout' %}">Cerrar Sesión</a></li>
         </ul>
@@ -50,11 +41,16 @@
             Mis Posts:
             <hr>
         </h2>
+        <h4>||<a class="btn btn-primary" href="{% url 'crearPost' %}" role="button">Pubiica algo nuevo</a>||</h4>
             {% for post in object_list  %}
                 <ul>
                     <h4>
                         <p>{{ post.titulo }}</p>
+
                         <div class="mb-1 text-muted">{{post.fecha_publicacion}}</div>
+                        <span>Este post tiene:  <i class="fa-regular fa-thumbs-up"></i> {{ post.likes.count }} likes.</span>
+                        <br>
+                        <span>Este post tiene:  <i class="fa-regular fa-comments"></i>{{ post.get_comentarios.count }} comentarios.</span>
                         <p>
                             |<a class="btn btn-info" href="{% url 'verPost' post.id %}" role="button">Ver post</a>|
                             |<a class="btn btn-secondary" href="{% url 'editarPost' post.id %}" role="button">Edita este post</a>|
@@ -63,9 +59,6 @@
                     </h4>
                 </ul>
             {% endfor %}
-        <h4>
-            ||<a class="btn btn-primary" href="{% url 'crearPost' %}" role="button">Pubiica algo nuevo</a>||
-        </h4>
     {% endblock blockPosts %}
   </div>
 {% else %}

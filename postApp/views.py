@@ -1,16 +1,18 @@
-from django.shortcuts import render, redirect
-from postApp.models import Post,Categoria
+#Funcionalidades de los post
+from django.shortcuts import get_object_or_404, render, redirect
+from django.urls import reverse
+from postApp.models import Post,Categoria, Comentario
 from django.db.models import Q
 from django.views.generic import ListView
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import DeleteView, CreateView, UpdateView
-#from postApp.forms import FormularioPost
+from postApp.forms import ComentarioForm
 
 #Import para enviar correos
 from postApp.forms import ContactEmailForm
 from django.core.mail import send_mail, BadHeaderError
 from django.conf import settings
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 
 #Decorators
 from django.contrib.auth.decorators import login_required
@@ -18,17 +20,8 @@ from .decorators import unauthenticated_user, allowed_users, only_escritor
 
 
 def inicio(request):
-    queryset = request.GET.get("buscar")
-    if queryset:
-        posts = Post.objects.filter(
-            Q(titulo__icontains = queryset) |
-            Q(subtitulo__icontains = queryset) |
-            Q(contenido__icontains = queryset)
-        ).distinct()
-        return render(request,'postApp/inicio.html',{'posts':posts})
-    else:
-        posts = Post.objects.all().order_by('-fecha_publicacion')
-        return render(request, 'postApp/inicio.html', {'posts': posts})
+    posts = Post.objects.all().order_by('-fecha_publicacion')
+    return render(request, 'postApp/inicio.html', {'posts': posts})
 
 
 class ListaPosts(ListView):
@@ -40,6 +33,13 @@ class VerPost(DetailView):
     
     model = Post
     template_name= "postApp/ver_post.html"
+
+    def get_context_data(self,*args, **kwargs):
+        contexto= super(VerPost, self).get_context_data(*args, **kwargs)
+        numero = get_object_or_404(Post, id=self.kwargs['pk'])
+        total_likes = numero.total_likes()
+        contexto['total_likes']= total_likes
+        return contexto
 
 class CrearPost(CreateView):
     
@@ -73,6 +73,58 @@ class BorrarPost(DeleteView):
     model = Post
     success_url = "/postApp/postLista"
 
+class AgregarComentario(CreateView):
+    
+    model = Comentario
+    form_class = ComentarioForm
+    template_name = "postApp/comentario_form.html"
+
+    def form_valid(self,form):
+        form.instance.post_id = self.kwargs['pk']
+        form.instance.autor = self.request.user
+        return super().form_valid(form)
+    
+    success_url = "/"
+
+    def get_context_data(self, **kwargs):
+        contexto = super().get_context_data(**kwargs)
+        contexto.update({
+            'tipo_template': 'Comentar'
+        })
+        return contexto
+
+
+def meGusta(request,pk):
+        post = get_object_or_404(Post, id=request.POST.get('post_id'))
+        post.likes.add(request.user)
+        return HttpResponseRedirect(reverse('verPost', args=pk))
+
+#NO ANDA
+#def buscar(request):
+#    if request.method == "POST":
+#        campo = request.POST['buscar']
+#        posts = Post.objects.filter(titulo__contains=campo)
+#        return render(request,'postApp/resultados_busqueda.html',{'campo': campo},{'posts':posts})
+#    else:
+#        return render(request,'postApp/resultados_busqueda.html',{'campo': campo},{'posts':posts})
+
+
+def periodismo(request):
+    posts=Post.objects.filter(categoria__nombre = 'Periodismo')
+    return render(request,'postApp/categoria_periodismo.html',{'posts':posts})
+    
+def qatar2022(request):
+    posts=Post.objects.filter(categoria__nombre = 'Qatar 2022')
+    return render(request,'postApp/categoria_periodismo.html',{'posts':posts})
+
+def futbol_argentino(request):
+    posts=Post.objects.filter(categoria__nombre = 'Futbol Argentino')
+    return render(request,'postApp/categoria_periodismo.html',{'posts':posts})
+
+def futbol_internacional(request):
+    posts=Post.objects.filter(categoria__nombre = 'Futbol Internacional')
+    return render(request,'postApp/categoria_periodismo.html',{'posts':posts})
+
 def aboutUs(request):
     return render(request,'postApp/about_us.html')
 
@@ -99,33 +151,3 @@ def contact(request):
 
     form = ContactEmailForm()
     return render(request, "postApp/contacto.html", {'form':form})
-
-
-def buscar(request):
-    queryset = request.GET.get("buscar")
-    # print(queryset)
-    posts = Post.objects.filter(estado = True)
-    if queryset:
-        posts = Post.objects.filter(
-            Q(titulo__icontains = queryset) |
-            Q(subtitulo__icontains = queryset) |
-            Q(contenido__icontains = queryset)
-        ).distinct()
-    return render(request,'postApp/inicio.html',{'posts':posts})
-
-
-def periodismo(request):
-    posts=Post.objects.filter(categoria__nombre = 'Periodismo')
-    return render(request,'postApp/categoria_periodismo.html',{'posts':posts})
-    
-def qatar2022(request):
-    posts=Post.objects.filter(categoria__nombre = 'Qatar 2022')
-    return render(request,'postApp/categoria_periodismo.html',{'posts':posts})
-
-def futbol_argentino(request):
-    posts=Post.objects.filter(categoria__nombre = 'Futbol Argentino')
-    return render(request,'postApp/categoria_periodismo.html',{'posts':posts})
-
-def futbol_internacional(request):
-    posts=Post.objects.filter(categoria__nombre = 'Futbol Internacional')
-    return render(request,'postApp/categoria_periodismo.html',{'posts':posts})
