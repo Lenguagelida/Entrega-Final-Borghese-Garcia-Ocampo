@@ -1,12 +1,13 @@
 #Funcionalidades de los post
 from django.shortcuts import get_object_or_404, render, redirect
 from django.urls import reverse
-from postApp.models import Post,Categoria, Comentario
+from postApp.models import Post, Comentario
 from django.db.models import Q
 from django.views.generic import ListView
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import DeleteView, CreateView, UpdateView
 from postApp.forms import ComentarioForm
+from django.core.paginator import Paginator, EmptyPage
 
 #Import para enviar correos
 from postApp.forms import ContactEmailForm
@@ -21,7 +22,18 @@ from .decorators import unauthenticated_user, allowed_users, only_escritor
 
 def inicio(request):
     posts = Post.objects.all().order_by('-fecha_publicacion')
-    return render(request, 'postApp/inicio.html', {'posts': posts})
+    mostrar = Paginator(posts, 2)
+    pagina_num = request.GET.get('pagina', 1)
+    #print("NUMERO DE PAGINAS")
+    #print(mostrar.num_pages)
+    try:
+        pagina = mostrar.page(pagina_num)
+        numeros = "n" * pagina.paginator.num_pages
+    except EmptyPage:
+        pagina = mostrar.page(1)
+        numeros = "n" * pagina.paginator.num_pages
+    
+    return render(request, 'postApp/inicio.html', {'posts': pagina, 'numeros': numeros})
 
 
 class ListaPosts(ListView):

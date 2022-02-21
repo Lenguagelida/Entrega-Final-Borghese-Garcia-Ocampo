@@ -39,7 +39,7 @@ class Post(models.Model):
 
     @property
     def get_comentarios_count(self):
-        return self.comentarios_set.all().count()
+        return self.comentarios.all().count()
 
 class Comentario(models.Model):
     autor = models.ForeignKey(User, on_delete=models.CASCADE)

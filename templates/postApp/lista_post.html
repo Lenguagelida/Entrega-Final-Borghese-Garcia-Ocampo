@@ -50,7 +50,7 @@
                         <div class="mb-1 text-muted">{{post.fecha_publicacion}}</div>
                         <span>Este post tiene:  <i class="fa-regular fa-thumbs-up"></i> {{ post.likes.count }} likes.</span>
                         <br>
-                        <span>Este post tiene:  <i class="fa-regular fa-comments"></i>{{ post.get_comentarios.count }} comentarios.</span>
+                        <span>Este post tiene:  <i class="fa-regular fa-comments"></i>{{ post.get_comentarios_count }} comentarios.</span>
                         <p>
                             |<a class="btn btn-info" href="{% url 'verPost' post.id %}" role="button">Ver post</a>|
                             |<a class="btn btn-secondary" href="{% url 'editarPost' post.id %}" role="button">Edita este post</a>|
