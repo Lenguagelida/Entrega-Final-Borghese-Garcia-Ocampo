@@ -1,40 +1,8 @@
 {% extends 'index.html' %}
 
-{% block barraBusqueda %}
-
-<div class="row" style="width: 400px">
-  <div class="col-md-12 search">
-    <form method="get">
-        <div id="custom-search-input">
-          <div class="input-group col-md-12">
-            <input type="text" class="form-control" style="height: 29px" placeholder="Buscar..." name="buscar" value = "{{ request.GET.buscar }}">
-            <span class="input-group-list">
-              <i class="icon icon-search"></i>
-              <button type="submit" class="boton btn-success">Buscar</button>
-            </span>
-          </div>
-        </div>
-    </form>
-  </div>
-</div>
-
-{% endblock barraBusqueda %}
-
-
-{% block bienvenido %}
-
-<h1 class="fw-bolder">¡Bienvenido a Tercer Tiempo!</h1>
-<p class="lead mb-0">Si 90 minutos no son suficientes para vos, entonces este es tu lugar para seguir debatiendo sobre fútbol argentino</p>
-
-
-{% endblock bienvenido %}
-
-
-
 
 {% block editNavBar %}
-
-
+                        
 {% if not request.user.is_authenticated  %}
 
 <li class="nav-item"><a class="nav-link" href="{% url 'AboutUs' %}">Acerca de nosotros</a></li>
@@ -63,29 +31,10 @@
       </li>
     </ul>
   </div>
-
 {% endif %}
 
+
 {% endblock editNavBar %}
-
-
-{% block logInLogOut %}
-    
-<h1>{{mensaje}}</h1>
-
-{% endblock logInLogOut %}
-
-{% block backgroundImage %}
-
-<div
-    class="bg-image"
-    style="
-    background-image: url('https://www.axis.com/sites/axis/files/styles/landscape_1920_x_768_jpg/public/2020-09/soccer_stadium_spectators_silhouette_2009_3840x1536_0.jpg?h=71e592e0&itok=LI607JsK');
-    height: 70vh;
-    "
-></div>
-
-{% endblock backgroundImage %}
 
 
 {% block blockPosts %}
@@ -93,7 +42,8 @@
 
 {% if posts %}
 
-<h2>Posts que te gustaron</h2>
+<h2 class="d-flex justify-content-center">Posts que te gustaron</h2>
+<br><br>
 {% for p in posts %}
 <div class="container">
   <div class="row mb-2">
@@ -103,9 +53,9 @@
               <h3 class="mb-0">{{ p.titulo }}</h3>
               <div class="mb-1 text-muted">{{p.fecha_publicacion}}|{{p.autor}}</div>
               <p class="card-text mb-auto">{{ p.subtitulo }}</p>
-                <span><i class="fa-regular fa-thumbs-up"></i> {{ p.likes.count }}</span>
-                <span><i class="fa-regular fa-comments"></i></span>
-                <span><i class="fa-regular fa-eye"></i> </span>
+              <span><i class="fa-regular fa-thumbs-up"></i> {{ p.likes.count }}</span>
+              <span><i class="fa-regular fa-comments"></i> {{ p.get_comentarios_count }}</span>
+              
             <a href="{% url 'verPost' p.id %}">Ver post</a>
         </div>
       <div class="col-auto d-none d-lg-block">
