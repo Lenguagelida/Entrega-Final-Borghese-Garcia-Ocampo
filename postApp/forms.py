@@ -19,9 +19,9 @@ class PostForm(forms.ModelForm):
             fields = ('titulo', 'subtitulo', 'categoria', 'autor', 'contenido', 'imagen')
         
             widgets = {
-            'titulo': forms.TextInput(attrs={'placeholder':'Titulo'}),
-            'subtitulo': forms.TextInput(attrs={'placeholder':'Subtitulo'}),
-            'autor' : forms.TextInput(attrs={'placeholder':'','id':'autor', 'readonly':"readonly" }),
+            'titulo': forms.TextInput(attrs={'class':'form-control','placeholder':'Titulo'}),
+            'subtitulo': forms.TextInput(attrs={'class':'form-control','placeholder':'Subtitulo'}),
+            'autor' : forms.TextInput(attrs={'class':'form-control','value':'','id':'autor', 'type':'hidden'}),
         }
         
 

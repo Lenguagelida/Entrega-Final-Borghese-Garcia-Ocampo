@@ -12,7 +12,6 @@ urlpatterns = [
     path('verPost/<pk>/comentar/',views.AgregarComentario.as_view(), name='comentar'),
     path('like/<pk>', views.meGusta, name='likePost'),
     path('contacto/',views.contact, name='Contacto'),
-    #path('buscar/',views.buscar, name='buscar'),
     path('periodismo/',views.periodismo,name='CategoriaPeriodismo'),
     path('qatar2022/',views.qatar2022,name='Qatar2022'),
     path('futbolargentino/',views.futbol_argentino,name='Futbolargentino'),
