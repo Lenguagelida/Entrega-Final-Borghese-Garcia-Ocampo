@@ -21,19 +21,24 @@ from .decorators import unauthenticated_user, allowed_users, only_escritor
 
 
 def inicio(request):
-    posts = Post.objects.all().order_by('-fecha_publicacion')
-    mostrar = Paginator(posts, 2)
-    pagina_num = request.GET.get('pagina', 1)
-    #print("NUMERO DE PAGINAS")
-    #print(mostrar.num_pages)
-    try:
-        pagina = mostrar.page(pagina_num)
-        numeros = "n" * pagina.paginator.num_pages
-    except EmptyPage:
-        pagina = mostrar.page(1)
-        numeros = "n" * pagina.paginator.num_pages
-    
-    return render(request, 'postApp/inicio.html', {'posts': pagina, 'numeros': numeros})
+    queryset = request.GET.get("buscar")
+    if queryset:
+        posts = Post.objects.filter(
+            Q(titulo__icontains = queryset) |
+            Q(subtitulo__icontains = queryset)
+        ).distinct()
+        return render(request, 'postApp/inicio.html', {'posts': posts})
+    else:
+        todosLosPosts = Post.objects.all().order_by('-fecha_publicacion')
+        mostrar = Paginator(todosLosPosts, 2)
+        pagina_num = request.GET.get('pagina', 1)
+        try:
+            posts = mostrar.page(pagina_num)
+            numeros = "n" * posts.paginator.num_pages
+        except EmptyPage:
+            posts = mostrar.page(1)
+            numeros = "n" * posts.paginator.num_pages
+        return render(request, 'postApp/inicio.html', {'posts': posts, 'numeros': numeros})
 
 
 class ListaPosts(ListView):
@@ -111,31 +116,53 @@ def meGusta(request,pk):
         post.likes.add(request.user)
         return HttpResponseRedirect(reverse('verPost', args=pk))
 
-#NO ANDA
-#def buscar(request):
-#    if request.method == "POST":
-#        campo = request.POST['buscar']
-#        posts = Post.objects.filter(titulo__contains=campo)
-#        return render(request,'postApp/resultados_busqueda.html',{'campo': campo},{'posts':posts})
-#    else:
-#        return render(request,'postApp/resultados_busqueda.html',{'campo': campo},{'posts':posts})
-
-
 def periodismo(request):
-    posts=Post.objects.filter(categoria__nombre = 'Periodismo')
-    return render(request,'postApp/categoria_periodismo.html',{'posts':posts})
+    queryset = request.GET.get("buscar")
+    if queryset:
+        posts = Post.objects.filter(
+            Q(titulo__icontains = queryset) |
+            Q(subtitulo__icontains = queryset)
+        ).distinct()
+        return render(request, 'postApp/inicio.html', {'posts': posts})
+    else:
+        posts=Post.objects.filter(categoria__nombre = 'Periodismo')
+        return render(request,'postApp/categoria_periodismo.html',{'posts':posts})
     
 def qatar2022(request):
-    posts=Post.objects.filter(categoria__nombre = 'Qatar 2022')
-    return render(request,'postApp/categoria_periodismo.html',{'posts':posts})
+    queryset = request.GET.get("buscar")
+    if queryset:
+        posts = Post.objects.filter(
+            Q(titulo__icontains = queryset) |
+            Q(subtitulo__icontains = queryset)
+        ).distinct()
+        return render(request, 'postApp/inicio.html', {'posts': posts})
+    else:    
+        posts=Post.objects.filter(categoria__nombre = 'Qatar 2022')
+        return render(request,'postApp/categoria_periodismo.html',{'posts':posts})
 
 def futbol_argentino(request):
-    posts=Post.objects.filter(categoria__nombre = 'Futbol Argentino')
-    return render(request,'postApp/categoria_periodismo.html',{'posts':posts})
+    queryset = request.GET.get("buscar")
+    if queryset:
+        posts = Post.objects.filter(
+            Q(titulo__icontains = queryset) |
+            Q(subtitulo__icontains = queryset)
+        ).distinct()
+        return render(request, 'postApp/inicio.html', {'posts': posts})
+    else:    
+        posts=Post.objects.filter(categoria__nombre = 'Futbol Argentino')
+        return render(request,'postApp/categoria_periodismo.html',{'posts':posts})
 
 def futbol_internacional(request):
-    posts=Post.objects.filter(categoria__nombre = 'Futbol Internacional')
-    return render(request,'postApp/categoria_periodismo.html',{'posts':posts})
+    queryset = request.GET.get("buscar")
+    if queryset:
+        posts = Post.objects.filter(
+            Q(titulo__icontains = queryset) |
+            Q(subtitulo__icontains = queryset)
+        ).distinct()
+        return render(request, 'postApp/inicio.html', {'posts': posts})
+    else:    
+        posts=Post.objects.filter(categoria__nombre = 'Futbol Internacional')
+        return render(request,'postApp/categoria_periodismo.html',{'posts':posts})
 
 def aboutUs(request):
     return render(request,'postApp/about_us.html')

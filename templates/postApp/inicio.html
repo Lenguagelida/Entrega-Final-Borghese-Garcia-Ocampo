@@ -4,11 +4,10 @@
 
 <div class="row" style="width: 400px">
   <div class="col-md-12 search">
-    <form method="POST" action="">
-      {% csrf_token %}
+    <form method="get">
         <div id="custom-search-input">
           <div class="input-group col-md-12">
-            <input type="text" class="form-control" style="height: 29px" placeholder="Buscar..." name="buscar">
+            <input type="text" class="form-control" style="height: 29px" placeholder="Buscar..." name="buscar" value = "{{ request.GET.buscar }}">
             <span class="input-group-list">
               <i class="icon icon-search"></i>
               <button type="submit" class="boton btn-success">Buscar</button>
@@ -89,7 +88,7 @@
 
 
 {% block blockPosts %}
-
+  
 {% for p in posts %}
 <div class="container">
   <div class="row mb-2">
@@ -111,6 +110,7 @@
   </div>    
 </div> 
 {% endfor %}
+
 <hr><br><br>
             <!-- Pagination-->
             <nav aria-label="Page navigation example">
