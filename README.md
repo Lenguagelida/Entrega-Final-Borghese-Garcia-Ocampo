@@ -32,7 +32,7 @@ Register me: David
 
 Profile: David
 
-Messages: N/A
+Messages: David
 
 Get pages:
 
@@ -47,3 +47,7 @@ Delete page: Daniel
 Get profile: Todos
 
 Update profile: Valentín
+
+Self liked posts: Valentín
+
+Search bar: Valentín
