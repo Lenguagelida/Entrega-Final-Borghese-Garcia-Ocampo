@@ -55,7 +55,9 @@
           Hola, {{request.user}}
         </a>
         <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+            {% if perms.postApp.add_post %}
           <li><a class="dropdown-item" href="{% url 'postLista' %}">Administrar Posts</a></li>
+            {% endif %}
           <li><a class="dropdown-item" href="{% url 'PostsConMeGustaPropios' %}">Mi actividad | Me Gusta</a></li>
           <li><a class="dropdown-item" href="{% url 'EditarPerfil' %}">Editar Perfil</a></li>
           <li><a class="dropdown-item" href="{% url 'Logout' %}">Cerrar Sesión</a></li>

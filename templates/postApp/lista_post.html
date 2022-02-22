@@ -43,23 +43,32 @@
             <hr>
         </h2>
         <h4>||<a class="btn btn-primary" href="{% url 'crearPost' %}" role="button">Pubiica algo nuevo</a>||</h4>
-            {% for post in object_list  %}
-                <ul>
-                    <h4>
-                        <p>{{ post.titulo }}</p>
-
-                        <div class="mb-1 text-muted">{{post.fecha_publicacion}}</div>
-                        <span>Este post tiene:  <i class="fa-regular fa-thumbs-up"></i> {{ post.likes.count }} likes.</span>
-                        <br>
-                        <span>Este post tiene:  <i class="fa-regular fa-comments"></i>{{ post.get_comentarios_count }} comentarios.</span>
-                        <p>
-                            |<a class="btn btn-info" href="{% url 'verPost' post.id %}" role="button">Ver post</a>|
-                            |<a class="btn btn-secondary" href="{% url 'editarPost' post.id %}" role="button">Edita este post</a>|
-                            |<a class="btn btn-danger" href="{% url 'borrarPost' post.id %}" role="button">Eliminar este post</a>|
-                        </p>
-                    </h4>
-                </ul>
-            {% endfor %}
+        <div class="table-responsive">
+          <table class="table table-stripped">
+            <thead>
+              <tr>
+                <th>Título del post</th>
+                <th>Autor</th>
+                <th>Categoría</th>
+                <th>Fecha de publicacion</th>
+                <th>Comunidad</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for post in object_list  %}
+                <tr>
+                  <td>{{ post.titulo }}</td>
+                  <td>{{ post.autor }}</td>
+                  <td>{{ post.categoria }}</td>
+                  <td>{{ post.fecha_publicacion }}</td>
+                  <td><span><i class="fa-regular fa-thumbs-up"></i> {{ post.likes.count }}</span> <span><i class="fa-regular fa-comments"></i>{{ post.get_comentarios_count }}</span></td>
+                  <td><a class="btn btn-info" href="{% url 'verPost' post.id %}" role="button">Ver</a> <a class="btn btn-secondary" href="{% url 'editarPost' post.id %}" role="button">Editar</a> <a class="btn btn-danger" href="{% url 'borrarPost' post.id %}" role="button">Eliminar</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+          </table>
+        
     {% endblock blockPosts %}
   </div>
 {% else %}

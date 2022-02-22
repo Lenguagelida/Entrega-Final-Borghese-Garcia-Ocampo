@@ -55,7 +55,9 @@
           Hola, {{request.user}}
         </a>
         <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+          {% if perms.postApp.add_post %}
           <li><a class="dropdown-item" href="{% url 'postLista' %}">Administrar Posts</a></li>
+            {% endif %}
           <li><a class="dropdown-item" href="{% url 'PostsConMeGustaPropios' %}">Mi actividad | Me Gusta</a></li>
           <li><a class="dropdown-item" href="{% url 'EditarPerfil' %}">Editar Perfil</a></li>
           <li><a class="dropdown-item" href="{% url 'Logout' %}">Cerrar Sesión</a></li>
@@ -103,8 +105,7 @@
               <div class="mb-1 text-muted">{{p.fecha_publicacion}}|{{p.autor}}</div>
               <p class="card-text mb-auto">{{ p.subtitulo }}</p>
                 <span><i class="fa-regular fa-thumbs-up"></i> {{ p.likes.count }}</span>
-                <span><i class="fa-regular fa-comments"></i></span>
-                <span><i class="fa-regular fa-eye"></i> </span>
+                <span><i class="fa-regular fa-comments"></i> {{ p.get_comentarios_count }}</span>
             <a href="{% url 'verPost' p.id %}">Ver post</a>
         </div>
       <div class="col-auto d-none d-lg-block">
