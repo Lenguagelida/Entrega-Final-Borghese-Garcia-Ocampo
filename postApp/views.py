@@ -6,7 +6,7 @@ from django.db.models import Q
 from django.views.generic import ListView
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import DeleteView, CreateView, UpdateView
-from postApp.forms import ComentarioForm
+from postApp.forms import ComentarioForm, PostForm
 from django.core.paginator import Paginator, EmptyPage
 
 #Import para enviar correos
@@ -59,10 +59,9 @@ class VerPost(DetailView):
         return contexto
 
 class CrearPost(CreateView):
-    
-    #form_class= FormularioPost
+
     model = Post
-    fields = ['titulo', 'subtitulo', 'categoria', 'autor', 'contenido', 'imagen']
+    form_class= PostForm    
     success_url = "/postApp/postLista"
 
 #allowed_users(allowed_roles=['lectores'])
@@ -74,9 +73,8 @@ class CrearPost(CreateView):
         return contexto
 class UpdatePost(UpdateView):
 
-    #form_class= FormularioPost
     model = Post
-    fields = ['titulo', 'subtitulo', 'categoria', 'autor', 'contenido', 'imagen']
+    form_class= PostForm 
     success_url = "/postApp/postLista"
 
     def get_context_data(self, **kwargs):

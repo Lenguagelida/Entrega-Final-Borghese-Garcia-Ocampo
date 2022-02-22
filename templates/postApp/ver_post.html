@@ -93,7 +93,7 @@
                     {% if user.is_authenticated %}
                         <form action="{% url 'likePost' post.pk %}" method="POST">
                             {% csrf_token %}
-                            <h4>¿Te gusto el post? Deja un like por aqui:<button type="submit" class="fa-regular fa-thumbs-up fa-lg", name="post_id", value="{{ object.id }}"></button></h4>
+                            <h4>¿Te gusto el post? Deja un like por aqui:<button type="submit"  class="fa-regular fa-thumbs-up fa-lg", name="post_id", value="{{ object.id }}"></button></h4>
                         </form>
                     {% else %}
                             <div class="alert alert-warning" role="alert">

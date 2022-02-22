@@ -117,11 +117,9 @@
     <div class="d-flex justify-content-center h-100">
       <div class="user_card">
         <div class="d-flex justify-content-center">
-          <!-- <h3 id="form-title">{{ tipo_template }}</h3> -->
-          <h3 id="form-title">Editar Publicación</h3>
+          <h3 id="form-title">{{ tipo_template }}</h3>
         </div>
         <div class="d-flex justify-content-center form_container">
-
           <form method="POST" action="" enctype="multipart/form-data">
                         {% csrf_token %}
             <div class="input-group mb-3">
@@ -131,10 +129,13 @@
                     {{form.as_p}}
                 </div>
             <div class="d-flex justify-content-center mt-3 login_container">
-              <!-- <button type="submit" class="btn btn-primary">Confirmar {{ tipo_template }}</button> -->
-              <button type="submit" class="btn btn-primary">Publicar</button>
+              <button type="submit" class="btn btn-primary">Confirmar {{ tipo_template }}</button>
               </div>
           </form>
+            <script>
+              var autor = "{{ user.username }}";
+              document.getElementById("autor").placeholder = autor
+            </script>
         </div>
       </div>
     </div>

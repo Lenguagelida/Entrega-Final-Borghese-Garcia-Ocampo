@@ -12,3 +12,16 @@ class ComentarioForm(forms.ModelForm):
     class Meta:
         model = Comentario
         fields = ('contenido',)
+
+class PostForm(forms.ModelForm):
+        class Meta:
+            model = Post
+            fields = ('titulo', 'subtitulo', 'categoria', 'autor', 'contenido', 'imagen')
+        
+            widgets = {
+            'titulo': forms.TextInput(attrs={'placeholder':'Titulo'}),
+            'subtitulo': forms.TextInput(attrs={'placeholder':'Subtitulo'}),
+            'autor' : forms.TextInput(attrs={'placeholder':'','id':'autor', 'readonly':"readonly" }),
+        }
+        
+
