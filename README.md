@@ -34,15 +34,7 @@ Profile: David
 
 Messages: David
 
-Get pages:
-
-Get page:
-
-Create page: Daniel
-
-Update Page: Daniel
-
-Delete page: Daniel
+CRUD Post: Daniel
 
 Get profile: Todos
 
