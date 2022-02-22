@@ -89,7 +89,11 @@
 
 
 {% block blockPosts %}
-  
+
+
+{% if posts %}
+
+<h2>Posts que te gustaron</h2>
 {% for p in posts %}
 <div class="container">
   <div class="row mb-2">
@@ -100,8 +104,8 @@
               <div class="mb-1 text-muted">{{p.fecha_publicacion}}|{{p.autor}}</div>
               <p class="card-text mb-auto">{{ p.subtitulo }}</p>
                 <span><i class="fa-regular fa-thumbs-up"></i> {{ p.likes.count }}</span>
-                <span><i class="fa-regular fa-comments"></i> {{ p.get_comentarios_count }}</span>
-                
+                <span><i class="fa-regular fa-comments"></i></span>
+                <span><i class="fa-regular fa-eye"></i> </span>
             <a href="{% url 'verPost' p.id %}">Ver post</a>
         </div>
       <div class="col-auto d-none d-lg-block">
@@ -111,32 +115,8 @@
   </div>    
 </div> 
 {% endfor %}
-
-<hr><br><br>
-            <!-- Pagination-->
-            <nav aria-label="Page navigation example">
-              <ul class="pagination justify-content-center">
-            {% if posts.has_previous %}
-            <li class="page-item"><a class="page-link" href="?pagina=1">&laquo Primer página</a></li>
-            <li class="page-item"><a class="page-link" href="{% url 'inicio' %}?pagina={{posts.previous_page_number}}">Página anterior</a></li>
-            {% endif %}
-            
-
-            
-            {% for n in numeros  %}
-            <li class="page-item"><a class="page-link" href="?pagina={{forloop.counter}}">{{forloop.counter}}</a></li>
-            {% endfor %}
-              
-            <!--
-            <li class="page-item disabled"><a href="#" class="page-link">Páginas: {{posts.number}} de {{posts.paginator.num_pages}}</a></li>
-            -->
-            
-            
-            {% if posts.has_next %}            
-            <li class="page-item"><a class="page-link" href="{% url 'inicio' %}?pagina={{posts.next_page_number}}">Página siguiente</a></li>
-            <li class="page-item"><a class="page-link" href="?pagina={{posts.paginator.num_pages}}">Última página&raquo</a></li>
-            {% endif %}
-              </ul>
-            </nav>
-<hr>
+    
+{% endif %}
+    
+  
 {% endblock blockPosts %}

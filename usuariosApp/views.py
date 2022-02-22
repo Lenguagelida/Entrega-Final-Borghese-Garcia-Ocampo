@@ -1,3 +1,4 @@
+from urllib import request
 import django
 from django.shortcuts import redirect, render
 from django.db.models import Q
@@ -113,3 +114,10 @@ def editarPerfil(request):
 # def logout_request(request):
 #     logout(request)
 #     return redirect('login')
+
+
+
+def postsConMeGustaPropios(request):
+    current_user = request.user.id
+    posts=Post.objects.filter(likes__id = current_user)
+    return render(request,'usuariosApp/posts_con_megusta.html',{"posts":posts})
