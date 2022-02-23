@@ -1,5 +1,5 @@
 #Funcionalidades de los post
-from django.shortcuts import get_object_or_404, render, redirect
+from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
 from postApp.models import Post, Comentario
 from django.db.models import Q
@@ -15,11 +15,6 @@ from django.core.mail import send_mail, BadHeaderError
 from django.conf import settings
 from django.http import HttpResponse, HttpResponseRedirect
 
-#Decorators
-from django.contrib.auth.decorators import login_required
-from .decorators import unauthenticated_user, allowed_users, only_escritor
-
-
 def inicio(request):
     queryset = request.GET.get("buscar")
     if queryset:
@@ -30,7 +25,7 @@ def inicio(request):
         return render(request, 'postApp/inicio.html', {'posts': posts})
     else:
         todosLosPosts = Post.objects.all().order_by('-fecha_publicacion')
-        mostrar = Paginator(todosLosPosts, 2)
+        mostrar = Paginator(todosLosPosts, 3)
         pagina_num = request.GET.get('pagina', 1)
         try:
             posts = mostrar.page(pagina_num)

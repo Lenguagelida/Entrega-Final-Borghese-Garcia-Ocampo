@@ -6,10 +6,6 @@ from django.contrib.auth.decorators import login_required
 from usuariosApp.forms import UserRegisterForm, UserEditForm
 from postApp.models import Post
 from django.contrib.auth.models import Group
-# Decorators
-from postApp.decorators import unauthenticated_user, allowed_users
-from django.contrib.auth.decorators import login_required
-
 
 # Register
 def register(request):
