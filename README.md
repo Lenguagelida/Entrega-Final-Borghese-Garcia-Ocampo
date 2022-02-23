@@ -43,3 +43,5 @@ Update profile: Valentín
 Self liked posts: Valentín
 
 Search bar: Valentín
+
+Basic permissions: Daniel
