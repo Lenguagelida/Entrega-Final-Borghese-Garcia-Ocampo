@@ -1,6 +1,8 @@
 # Entrega-Final-Borghese-Garcia-Ocampo
 Blog Proyecto Final Coderhouse Python Django
 
+
+ENLACE AL VIDEO CON EXPLICACIÓN DE FUNCIONALIDADES GENERALES: https://www.youtube.com/watch?v=z4BAhmImY18
 =======================================================
 
 Autores:
@@ -45,3 +47,5 @@ Self liked posts: Valentín
 Search bar: Valentín
 
 Basic permissions: Daniel
+
+Video: Valentín
